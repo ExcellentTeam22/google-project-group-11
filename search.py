@@ -4,10 +4,12 @@ from dataclasses import dataclass
 
 def get_data() -> dict[set[str]]:
     """
-    get_data function read all the files in the Resources, inside all directory and
+    get_data function read all the files in the Resources,
+     inside all directory and
     subdirectories.
-    :return: A dictionary that each key is a word inside a file, and for each word a list of
-        lines that contain that word (the line is converted to hash)
+    :return:A dictionary that each key is a word inside a file,
+     and for each word a list of
+    lines that contain that word (the line is converted to hash)
     """
     word_dict = {}
     for root, dirs, files in os.walk('resources'):
@@ -39,6 +41,7 @@ class AutoCompleteData:
     def print(self):
         print(self.completed_sentence)
 
+
 def get_best_k_completions(prefix: str) -> list[str]:
     results = []
     data = get_data()
@@ -50,6 +53,7 @@ def get_best_k_completions(prefix: str) -> list[str]:
             if len(results) == 5:
                 break
     return results
+
 
 def print_user_input() -> None:
     user_search = input('Enter your text:')
