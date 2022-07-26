@@ -17,5 +17,5 @@ def get_data() -> dict[list[int]]:
                     for word in line.split(" "):    #every word seperated by space
                         if word not in word_dict.keys():
                             word_dict[word] = []
-                        word_dict[word].append(hash(line)) #add the line to the key word
+                        word_dict[word].append(line) #add the line to the key word
     return word_dict
