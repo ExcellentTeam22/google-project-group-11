@@ -16,11 +16,11 @@ def get_data() -> dict[list[str]]:
             with open(path, encoding="utf8") as f:  #open the file
                 for line in f:
                     for word in line.split(" "):    #every word seperated by space
+                        word = word.lower()
                         if word not in word_dict.keys():
                             word_dict[word] = []
                         word_dict[word].append(line) #add the line to the key word
     return word_dict
-
 
 
 @dataclass
@@ -39,19 +39,21 @@ class AutoCompleteData:
     def print(self):
         print(self.completed_sentence)
 
-def get_best_k_completions(prefix: str) -> list[AutoCompleteData]:
+def get_best_k_completions(prefix: str) -> list[str]:
     results = []
     data = get_data()
+    prefix = prefix.lower()
     user_search_list = prefix.split(" ")
     for sentence in data[user_search_list[0]]:
-        if sentence.find(prefix) != -1:
+        if sentence.lower().find(prefix) != -1:
             results.append(sentence)
             if len(results) == 5:
                 break
-    print(results)
+    return results
 
-def get_user_input() -> None:
+def print_user_input() -> None:
     user_search = input('Enter your text:')
-    print(get_best_k_completions(user_search))
+    for result in get_best_k_completions(user_search):
+        print(result)
 
-get_user_input()
+print_user_input()
