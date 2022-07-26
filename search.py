@@ -2,7 +2,7 @@ import os
 from dataclasses import dataclass
 
 
-def get_data() -> dict[list[str]]:
+def get_data() -> dict[set[str]]:
     """
     get_data function read all the files in the Resources, inside all directory and
     subdirectories.
@@ -18,8 +18,8 @@ def get_data() -> dict[list[str]]:
                     for word in line.split(" "):    #every word seperated by space
                         word = word.lower()
                         if word not in word_dict.keys():
-                            word_dict[word] = []
-                        word_dict[word].append(line) #add the line to the key word
+                            word_dict[word] = set()
+                        word_dict[word].add(line) #add the line to the key word
     return word_dict
 
 
